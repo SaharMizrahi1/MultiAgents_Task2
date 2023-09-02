@@ -71,5 +71,5 @@ public class MASP {
 			entry.getValue().print(domainSize);
 			System.out.println();
 		}
-	}
+	}//test
 }
