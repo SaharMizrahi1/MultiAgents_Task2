@@ -18,7 +18,7 @@ public class Main {
 			pw=0; // PD is selected
 
 		// generate and print CSP
-		Generator gen = new Generator(n, p1, Type);
+		Generator gen = new Generator(n, p1, Type, pw);
 		MASP masp = gen.generateMASP();
 		masp.print();
 
