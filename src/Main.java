@@ -7,12 +7,18 @@ public class Main {
 
 		// extract parameters
 		int n = Integer.valueOf(args[0]).intValue();
-		int d = Integer.valueOf(args[1]).intValue();
+		int Type = Integer.valueOf(args[1]).intValue();// 0=PD , 1=BoS
 		double p1 = Double.valueOf(args[2]).doubleValue();
-		double p2 = Double.valueOf(args[3]).doubleValue();
+		//double p2 = Double.valueOf(args[3]).doubleValue();
+		double pw;
+
+		if(Type == 1) //BoS is selected
+			 pw = Double.valueOf(args[3]).doubleValue();
+		else
+			pw=0; // PD is selected
 
 		// generate and print CSP
-		Generator gen = new Generator(n, d, p1, p2);		
+		Generator gen = new Generator(n, p1, Type);
 		MASP masp = gen.generateMASP();
 		masp.print();
 

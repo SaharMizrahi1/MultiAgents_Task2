@@ -13,18 +13,28 @@ import java.util.Map.Entry;
 public class MASP {
 
 	// required fields - the constraints tables and the domain size
-	private HashMap<VarTuple, ConsTable> cons_tables;
-	private int domainSize;
-	int n;
+	//private HashMap<VarTuple, ConsTable> cons_tables;
+	//private int domainSize;
+	private int Type;
+	private int n;
+	private double pw;
+	boolean[][] neighbors;
+	//int n;
 	
 	/*
 	 * constructor
 	 */
-	public MASP(HashMap<VarTuple, ConsTable> cons_tables, int domainSize, int agents) {
-		this.cons_tables = cons_tables;
-		this.domainSize = domainSize;
-		this.n = agents;
+	public MASP(int n, boolean[][] neighbors, int Type, double pw) {
+		this.n = n;
+		this.neighbors=neighbors;
+		this.Type=Type;
+		this.pw=pw; //should change ?
 	}
+//	public MASP(HashMap<VarTuple, ConsTable> cons_tables, int domainSize, int agents) {
+//		this.cons_tables = cons_tables;
+//		this.domainSize = domainSize;
+//		this.n = agents;
+//	}
 
 	public HashMap<Integer, ConsTable> tablesOf(int i) {
 		
