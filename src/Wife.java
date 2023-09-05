@@ -1,2 +1,2 @@
-public class Wife {
+public class Wife extends Agent{
 }

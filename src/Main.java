@@ -33,8 +33,28 @@ public class Main {
 		for (int i = 0; i < n; i++) {
 			// use the csp to extract the private information of each agent
 			HashMap<Integer, ConsTable> private_information = masp.tablesOf(i);
-			Thread t = new Thread(new Agent(i, mailer, private_information, n, d));
-			threads.add(t);
+
+			//if bos then we need to create hubands and wives:
+			if (Type==1)
+			{
+				if(math.random<=pw)
+				{
+					Thread t = new Thread(new Wife(i, mailer, private_information, n, d)); //fix the constructor
+					threads.add(t);
+				}
+				else
+				{
+					Thread t = new Thread(new Husband(i, mailer, private_information, n, d)); //fix the constructor
+					threads.add(t);
+				}
+
+			}
+			else
+			{
+				Thread t = new Thread(new Agent(i, mailer, private_information, n, d));
+				threads.add(t);
+			}
+		
 		}
 
 		// run agents as threads

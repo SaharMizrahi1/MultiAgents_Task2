@@ -1,2 +1,2 @@
-public class Husband {
+public class Husband extends Agent{
 }
