@@ -26,9 +26,9 @@ public class Generator {
 		
 		//HashMap<VarTuple, ConsTable> cons_tables = new HashMap<VarTuple, ConsTable>();
 		boolean[][] neighbors = new boolean[n][n];
-		
 		for (int i = 0; i < n; i++) {
 			for (int j = i + 1; j < n; j++) {
+
 				if (Math.random() < p1) {
 					neighbors[i][j] = true;
 					neighbors[j][i] = true; // set the corresponding cell symmetrically

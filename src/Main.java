@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.SortedSet;
 
 public class Main {
 
@@ -33,26 +34,26 @@ public class Main {
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		for (int i = 0; i < n; i++) {
 			// use the csp to extract the private information of each agent
-			HashMap<Integer, ConsTable> private_information = masp.tablesOf(i);
-
+			//HashMap<Integer, ConsTable> private_information = masp.tablesOf(i);
+			SortedSet<Integer> AgentNeighbors= game.neighborsOf(i);
 			//if bos then we need to create husbands and wives:
 			if (Type==1)
 			{
 				if(Math.random()<=pw)
 				{
-					Thread t = new Thread(new Wife(i, mailer, private_information, n, d)); //fix the constructor
+					Thread t = new Thread(new Wife(i, mailer, AgentNeighbors, n)); //fix the constructor
 					threads.add(t);
 				}
 				else
 				{
-					Thread t = new Thread(new Husband(i, mailer, private_information, n, d)); //fix the constructor
+					Thread t = new Thread(new Husband(i, mailer, AgentNeighbors, n)); //fix the constructor
 					threads.add(t);
 				}
 
 			}
 			else
 			{
-				Thread t = new Thread(new Agent(i, mailer, private_information, n, d));
+				Thread t = new Thread(new Agent(i, mailer, AgentNeighbors, n));
 				threads.add(t);
 			}
 		

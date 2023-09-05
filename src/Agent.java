@@ -2,14 +2,17 @@
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.SortedSet;
 
 public class Agent implements Runnable {
 
 	private int id;
-	private int domainSize, assignment, agents;
+	private int assignment, agents;
 	private Mailer mailer;
-	private HashMap<Integer, ConsTable> constraints;
+	//private HashMap<Integer, ConsTable> constraints;
 	private HashMap<Integer, Integer> assignments = new HashMap<Integer, Integer>();
+
+	SortedSet<Integer> neighbors; //ids of all neighbors of this agent
 	
 	/*
 	 * constructor parameters -
@@ -17,11 +20,11 @@ public class Agent implements Runnable {
 	 * a reference to mailer
 	 * private information from masp object
 	 */
-	public Agent(int id, Mailer mailer, HashMap<Integer, ConsTable> constraints, int n, int d) {
+	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n) {
 		this.id = id;
 		this.mailer = mailer;
-		this.constraints = constraints;
-		this.domainSize = d;
+		this.neighbors=neighbors;
+		//this.domainSize = d;
 		this.agents = n;
 		
 		Random r = new Random();
