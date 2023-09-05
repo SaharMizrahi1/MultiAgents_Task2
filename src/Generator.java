@@ -22,7 +22,7 @@ public class Generator {
 	}
 
 	// generate masp
-	public MASP generateMASP() { //Define a probability p1 to connect two agents.
+	public Game generateGame() { //Define a probability p1 to connect two agents.
 		
 		//HashMap<VarTuple, ConsTable> cons_tables = new HashMap<VarTuple, ConsTable>();
 		boolean[][] neighbors = new boolean[n][n];
@@ -42,7 +42,15 @@ public class Generator {
 
 			}
 		}
+		if (Type == 0) { // Prisoner's Dilemma
+			return new PrisonersDilemma(neighbors);
+		} else if (Type == 1) { // Battle of the Sexes
+			return new BattleOfSexes(neighbors);
+		} else {
+			// Handle other game types or provide a default behavior
+			return null;
+		}
 		//return new pd / battleOFsexes ?
-		return new MASP(n,neighbors,Type,pw);
+		//return new MASP(n,neighbors,Type,pw);
 	}
 }

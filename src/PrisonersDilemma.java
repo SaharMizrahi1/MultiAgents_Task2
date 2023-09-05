@@ -1,7 +1,8 @@
 public class PrisonersDilemma extends Game {
 
-    public PrisonersDilemma() {
+    public PrisonersDilemma(boolean[][] network) {
         super();
+        this.network=network;
         initializeMatrix();
     }
 

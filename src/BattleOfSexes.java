@@ -1,7 +1,8 @@
 public class BattleOfSexes extends Game{
 
-    public BattleOfSexes() {
+    public BattleOfSexes(boolean[][] network) {
         super();
+        this.network=network;
         initializeMatrix();
     }
 

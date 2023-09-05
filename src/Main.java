@@ -19,8 +19,9 @@ public class Main {
 
 		// generate and print CSP
 		Generator gen = new Generator(n, p1, Type, pw);
-		MASP masp = gen.generateMASP();
-		masp.print();
+		//MASP masp = gen.generateMASP();
+		Game game = gen.generateGame();
+		//masp.print();
 
 		// initialize mailer
 		Mailer mailer = new Mailer();
@@ -34,10 +35,10 @@ public class Main {
 			// use the csp to extract the private information of each agent
 			HashMap<Integer, ConsTable> private_information = masp.tablesOf(i);
 
-			//if bos then we need to create hubands and wives:
+			//if bos then we need to create husbands and wives:
 			if (Type==1)
 			{
-				if(math.random<=pw)
+				if(Math.random()<=pw)
 				{
 					Thread t = new Thread(new Wife(i, mailer, private_information, n, d)); //fix the constructor
 					threads.add(t);
