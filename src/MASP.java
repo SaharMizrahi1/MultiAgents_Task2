@@ -36,20 +36,20 @@ public class MASP {
 //		this.n = agents;
 //	}
 
-	public HashMap<Integer, ConsTable> tablesOf(int i) {
+	// public HashMap<Integer, ConsTable> tablesOf(int i) {
 		
-		HashMap<Integer, ConsTable> tables = new HashMap<Integer, ConsTable>();
-		SortedSet<Integer> neighbors = neighborsOf(i);
-		for (int j: neighbors) {
-			for (Entry<VarTuple, ConsTable> entry : cons_tables.entrySet()) {
-				VarTuple vt = entry.getKey();
-				if ((vt.getI() == i && vt.getJ() == j) || (vt.getJ() == i && vt.getI() == j)) {
-					tables.put(j, cons_tables.get(vt));
-				}
-			}
-		}
-		return tables;
-	}
+	// 	HashMap<Integer, ConsTable> tables = new HashMap<Integer, ConsTable>();
+	// 	SortedSet<Integer> neighbors = neighborsOf(i);
+	// 	for (int j: neighbors) {
+	// 		for (Entry<VarTuple, ConsTable> entry : cons_tables.entrySet()) {
+	// 			VarTuple vt = entry.getKey();
+	// 			if ((vt.getI() == i && vt.getJ() == j) || (vt.getJ() == i && vt.getI() == j)) {
+	// 				tables.put(j, cons_tables.get(vt));
+	// 			}
+	// 		}
+	// 	}
+	// 	return tables;
+	// }
 	
 	private SortedSet<Integer> neighborsOf(int i) {
 		SortedSet<Integer> neighbors = new TreeSet<Integer>();

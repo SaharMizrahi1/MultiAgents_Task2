@@ -42,7 +42,7 @@ public class Generator {
 
 			}
 		}
-		
+		//return new pd / battleOFsexes ?
 		return new MASP(n,neighbors,Type,pw);
 	}
 }
