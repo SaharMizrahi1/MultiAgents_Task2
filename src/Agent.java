@@ -9,13 +9,10 @@ public class Agent implements Runnable {
 	private int id;
 	private int agents;
 	private Mailer mailer;
-	//private HashMap<Integer, ConsTable> constraints;
-	private HashMap<Integer, Integer> assignments = new HashMap<Integer, Integer>();
-
 	SortedSet<Integer> neighbors; //ids of all neighbors of this agent
 	// New fields by Sahar for agent's strategy, AgentView, Agent's Gain
 	private String strategy;
-	private HashMap<Integer, Integer> agentView = new HashMap<Integer, Integer>();
+	private HashMap<Integer, String> agentView = new HashMap<Integer, String>();
 	private int agentGain;
 
 
@@ -86,7 +83,7 @@ public class Agent implements Runnable {
 		}
 		//By Sahar
 		// Update Agent's Gain
-		agentGain = success; // Added: Store the agent's gain
+		//agentGain = success; // Added: Store the agent's gain
 
 		// Update AgentView
 		for (int neighbor : neighbors) {
