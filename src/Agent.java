@@ -13,22 +13,34 @@ public class Agent implements Runnable {
 	private HashMap<Integer, Integer> assignments = new HashMap<Integer, Integer>();
 
 	SortedSet<Integer> neighbors; //ids of all neighbors of this agent
-	
+	// New fields by Sahar for agent's strategy, AgentView, Agent's Gain
+	private String strategy;
+	private HashMap<Integer, Integer> agentView = new HashMap<Integer, Integer>();
+	private int agentGain;
+
+
+
 	/*
-	 * constructor parameters -
-	 * agent's id
-	 * a reference to mailer
-	 * private information from masp object
+	 * Constructor parameters:
+	 * id - Agent's unique identifier.
+	 * mailer - A reference to the mailer for communication.
+	 * neighbors - A set of IDs representing neighboring agents.
+	 * n - Total number of agents in the system.
+	 * strategy - The current strategy of the agent.
 	 */
-	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n) {
+	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n,String strategy) {
 		this.id = id;
 		this.mailer = mailer;
 		this.neighbors=neighbors;
-		//this.domainSize = d;
 		this.agents = n;
-		
+		this.strategy = strategy; // Added: Store the agent's strategy
 		Random r = new Random();
-		assignment = r.nextInt(domainSize);
+	}
+
+
+	// By Sahar Getter for Agent's Gain
+	public int getAgentGain() {
+		return agentGain;
 	}
 
 	@Override
@@ -71,6 +83,17 @@ public class Agent implements Runnable {
 				success++;
 			}
 		}
+		//By Sahar
+		// Update Agent's Gain
+		agentGain = success; // Added: Store the agent's gain
+
+		// Update AgentView
+		for (int neighbor : neighbors) {
+			if (assignments.containsKey(neighbor)) {
+				agentView.put(neighbor, assignments.get(neighbor));
+			}
+		}
+		//
 		
 		System.out.println("id: " + id + ", assignment: " + assignment + ", successful constraint checks: " + success);
 		
