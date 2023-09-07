@@ -28,13 +28,14 @@ public class Agent implements Runnable {
 	 * n - Total number of agents in the system.
 	 * strategy - The current strategy of the agent.
 	 */
-	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n,String strategy) {
+	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n) {
 		this.id = id;
 		this.mailer = mailer;
 		this.neighbors=neighbors;
 		this.agents = n;
-		this.strategy = strategy; // Added: Store the agent's strategy
-		Random r = new Random();
+		//this.strategy = strategy; // Added: Store the agent's strategy
+		this.strategy=initializeRandomStrategy(); //each agent starts with a random strategy
+
 	}
 
 
@@ -118,18 +119,18 @@ public class Agent implements Runnable {
 
 
 // shaked added
-	private void initializeRandomStrategy() {
+	private String initializeRandomStrategy() {
     // Randomly select a strategy from the available options
     Random random = new Random();
     int randomIndex = random.nextInt(2);
 	if(randomIndex==0)
-		strategy = "Cooperate";
+		return "Cooperate";
 		else
-			strategy = "Defect";
+			return "Defect";
 
 }
 
   
 }
 
-}
+
