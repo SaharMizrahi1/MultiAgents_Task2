@@ -38,7 +38,6 @@ public class Main {
 			ArrayList<Thread> threads = new ArrayList<Thread>();
 			for (int i = 0; i < n; i++) {
 				// use the csp to extract the private information of each agent
-				//HashMap<Integer, ConsTable> private_information = masp.tablesOf(i);
 				SortedSet<Integer> AgentNeighbors = game.neighborsOf(i);
 				//if bos then we need to create husbands and wives:
 				if (Type.equals("BoS")) {
