@@ -1,0 +1,7 @@
+// input parameters - 500 PD 0.2
+// 500 - number of agents
+// PD - the game played
+// 0.2 - p1, the probability that two agents are connected
+
+Num_Iterations - 1.98
+SW - 250.78
