@@ -44,43 +44,7 @@ public class Agent implements Runnable {
 	@Override
 	public void run() {
 		
-		
-		Message m = new AssignmentMessage(id, assignment);
-		for (Entry<Integer, ConsTable> e: constraints.entrySet()) {
-			mailer.send(e.getKey(), m);
-		}
-		
-		while (assignments.size() < constraints.size()) {
-			AssignmentMessage message = (AssignmentMessage) mailer.readOne(id);
-			if (message == null) {
-				continue;
-			}
-			
-			assignments.put(message.getSender(), message.getAssignment());
-		}
-		
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		int success = 0;
-		for (Entry<Integer, ConsTable> e: constraints.entrySet()) {
-			int a1 = -1, a2 = -1;
-			if (e.getKey() < id) {
-				a1 = assignments.get(e.getKey());
-				a2 = assignment;
-			}
-			else {
-				a2 = assignments.get(e.getKey());
-				a1 = assignment;
-			}
-			if (e.getValue().check(a1, a2)) {
-				success++;
-			}
-		}
+
 		//By Sahar
 		// Update Agent's Gain
 		//agentGain = success; // Added: Store the agent's gain
@@ -91,7 +55,7 @@ public class Agent implements Runnable {
 				agentView.put(neighbor, assignments.get(neighbor));
 			}
 		}
-		//
+		//Yair ? not sure if delete
 		
 		System.out.println("id: " + id + ", assignment: " + assignment + ", successful constraint checks: " + success);
 		
