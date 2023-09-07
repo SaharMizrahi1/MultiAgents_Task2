@@ -12,7 +12,7 @@ public class Game {
 
     }
 
-    public SortedSet<Integer> neighborsOf(int i) { //returns a set of agent i's neighbors
+    public SortedSet<Integer> neighborsOf(int i) { //returns a set of agent it's neighbors
         SortedSet<Integer> neighbors = new TreeSet<Integer>();
         for (int k = 0; k < network.length; k++) {
             for (int j = k + 1; j < network.length; j++) {

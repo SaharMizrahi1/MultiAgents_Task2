@@ -7,7 +7,7 @@ import java.util.SortedSet;
 public class Agent implements Runnable {
 
 	private int id;
-	private int assignment, agents;
+	private int agents;
 	private Mailer mailer;
 	//private HashMap<Integer, ConsTable> constraints;
 	private HashMap<Integer, Integer> assignments = new HashMap<Integer, Integer>();
