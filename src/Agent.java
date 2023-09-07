@@ -35,7 +35,6 @@ public class Agent implements Runnable {
 		this.mailer = mailer;
 		this.neighbors=neighbors;
 		this.agents = n;
-		//this.strategy = strategy; // Added: Store the agent's strategy
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
 
 	}
@@ -130,6 +129,7 @@ public class Agent implements Runnable {
 	//compute the best response according to the neighbors assignments from the last round
 	private String computeBestResponse(HashMap<Integer, String> agentView)
 	{
+
 
 	}
 
