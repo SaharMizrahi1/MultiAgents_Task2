@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class Generator {
 
-	private int Type;
+	private String Type;
 	private int n;
 	private double p1, pw;
 
@@ -14,7 +14,7 @@ public class Generator {
 	 * p1, probability that two agents are constrained
 	 *
 	 */
-	public Generator(int n, double p1, int Type, double pw) {
+	public Generator(int n, double p1, String Type, double pw) {
 		this.n = n;
 		this.p1 = p1;
 		this.Type = Type;
@@ -42,12 +42,12 @@ public class Generator {
 
 			}
 		}
-		if (Type == 0) { // Prisoner's Dilemma
+		if (Type.equals("PD")) { // Prisoner's Dilemma
 			return new PrisonersDilemma(neighbors);
-		} else if (Type == 1) { // Battle of the Sexes
+		} else if (Type.equals("BoS")) { // Battle of the Sexes
 			return new BattleOfSexes(neighbors);
 		} else {
-			// Handle other game types or provide a default behavior
+			// Handle default behavior
 			return null;
 		}
 		//return new pd / battleOFsexes ?

@@ -8,15 +8,20 @@ public class Main {
 
 		// extract parameters
 		int n = Integer.valueOf(args[0]).intValue();
-		int Type = Integer.valueOf(args[1]).intValue();// 0=PD , 1=BoS
+		int Type = args[1];// PD/BoS
 		double p1 = Double.valueOf(args[2]).doubleValue();
-		//double p2 = Double.valueOf(args[3]).doubleValue();
-		double pw;
+	
+		double pw = 0.0;
 
-		if(Type == 1) //BoS is selected
+		if(Type.equals("BoS")){ //BoS is selected
+			if (args.length >= 4) {
 			 pw = Double.valueOf(args[3]).doubleValue();
+			}
 		else
-			pw=0; // PD is selected
+			System.out.println("Missing argument pw for BoS type.");
+            return; 
+		}
+
 
 		// generate and print CSP
 		Generator gen = new Generator(n, p1, Type, pw);
