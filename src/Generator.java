@@ -18,6 +18,7 @@ public class Generator {
 		this.n = n;
 		this.p1 = p1;
 		this.Type = Type;
+		this.pw = pw;
 	//	this.p2 = p2;
 	}
 

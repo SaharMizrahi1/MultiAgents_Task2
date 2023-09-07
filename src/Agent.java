@@ -116,4 +116,20 @@ public class Agent implements Runnable {
 		}
 	}
 
+
+// shaked added
+	private void initializeRandomStrategy() {
+    // Randomly select a strategy from the available options
+    Random random = new Random();
+    int randomIndex = random.nextInt(2);
+	if(randomIndex==0)
+		strategy = "Cooperate";
+		else
+			strategy = "Defect";
+
+}
+
+  
+}
+
 }
