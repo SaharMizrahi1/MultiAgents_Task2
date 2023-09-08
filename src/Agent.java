@@ -129,6 +129,26 @@ public class Agent implements Runnable {
 	//compute the best response according to the neighbors assignments from the last round
 	private String computeBestResponse(HashMap<Integer, String> agentView)
 	{
+		String bestResponse = strategy; // Initialize with the agent's current strategy
+		// Access the game-specific matrix based on the agent's game and gender
+		VarTuple[][] matrix = null;
+
+		if (game instanceof BattleOfSexes) {
+			for(String neighborStrategy: agentView.values())
+			{
+				if(this instanceof Husband)
+				{
+					if()
+				}
+			}
+			BattleOfSexes bosGame = (BattleOfSexes) game;
+			if (isMan()) {
+				matrix = bosGame.getManMatrix();
+			} else {
+				matrix = bosGame.getWomanMatrix();
+			}
+		}
+
 
 
 	}

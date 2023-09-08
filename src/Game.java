@@ -8,7 +8,7 @@ public class Game {
 
 
 
-    public void initializeMatrix() {
+    private void initializeMatrix() {
 
     }
 
@@ -26,5 +26,7 @@ public class Game {
         return neighbors;
     }
 
-
+    public VarTuple[][] getMatrix() {
+        return matrix;
+    }
 }
