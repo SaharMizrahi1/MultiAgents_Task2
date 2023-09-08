@@ -4,14 +4,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class Game {
-    VarTuple [][] matrix = new VarTuple[2][2];
+
     boolean[][] network;
 
-
-
-    private void initializeMatrix() {
-
-    }
 
     public SortedSet<Integer> neighborsIDOf(int i) { //returns a set of agent it's neighbors
         SortedSet<Integer> neighbors = new TreeSet<Integer>();
@@ -42,9 +37,11 @@ public class Game {
     }
 
 
+    public int getStrategyIndex(String strategy) {
+       return -1;
 
-
-    public VarTuple[][] getMatrix() {
-        return matrix;
     }
+
+
+
 }

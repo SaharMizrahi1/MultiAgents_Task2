@@ -135,25 +135,56 @@ public class Agent implements Runnable {
 		// Access the game-specific matrix based on the agent's game and gender
 		VarTuple[][] matrix = null;
 
-		if (game instanceof BattleOfSexes) {
-			for( Agent neighbor : neighbors)
+		for( Agent neighbor : neighbors)
+		{
+			if (game instanceof BattleOfSexes)
 			{
 				if(this instanceof Husband)
 				{
 					if(neighbor instanceof Husband)
 						matrix=((BattleOfSexes) game).getMan_man();
 					else
-						matrix= game.getMatrix();
+						matrix= ((BattleOfSexes) game).getMan_woman();
 				}
 				else{
 					if(neighbor instanceof Husband)
-						matrix= game.getMatrix();
+						matrix= ((BattleOfSexes) game).getWoman_man();
 					else
 						matrix= ((BattleOfSexes) game).getWoman_woman();
 				}
 			}
+			else
+				matrix=((PrisonersDilemma)game).getMatrix(); //instanceof PD game
+
+			String neighborStrategy=agentView.get(neighbor.getId());
+			int neighborIndex;
+			if(game instanceof PrisonersDilemma) {
+				neighborIndex = ((PrisonersDilemma) game).getStrategyIndex(neighborStrategy);
+				int value0=matrix[0][neighborIndex].getI();
+				int value1=matrix[1][neighborIndex].getI();
+				if(value1>value0)
+					bestResponse="Cooperate";
+				else
+					bestResponse="Defect";
+
+			}
+			else {
+				neighborIndex = ((BattleOfSexes) game).getStrategyIndex(neighborStrategy);
+				int value0 = matrix[0][neighborIndex].getI();
+				int value1 = matrix[1][neighborIndex].getI();
+				if (value1 > value0)
+					bestResponse="Soccer";
+				else
+					bestResponse="Theatre";
+			}
 
 		}
+		return bestResponse;
+
+
+
+
+
 
 
 
