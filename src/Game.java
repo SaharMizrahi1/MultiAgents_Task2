@@ -22,8 +22,8 @@ public class Game {
         return neighbors;
     }
 
-    public SortedSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
-        SortedSet<Agent> neighbors = new TreeSet<Agent>();
+    public TreeSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
+        TreeSet<Agent> neighbors = new TreeSet<Agent>();
 
         for (Agent agent: agents)
         {

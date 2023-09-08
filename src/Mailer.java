@@ -2,12 +2,15 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * used for communication among agents
  */
 public class Mailer {
 
+	private AtomicInteger totalNumIterations= new AtomicInteger(0);
+	private AtomicInteger totalGain = new AtomicInteger(0);
 	// maps between agents and their mailboxes
 	private HashMap<Integer, List<Message>> map = new HashMap<>();
 	
@@ -21,7 +24,7 @@ public class Mailer {
 		}
 	}
 
-	// agent @receiver reads the first message from its mail box
+	// agent @receiver reads the first message from its mailbox
 	public Message readOne(int receiver) {
 		
 		List<Message> l = map.get(receiver);
@@ -41,4 +44,23 @@ public class Mailer {
 		List<Message> l= new ArrayList<Message>();
 		this.map.put(i, l);
 	}
+
+	public void addToTotalGain(int agentGain)
+	{
+		totalGain.addAndGet(agentGain);
+	}
+	public void addToTotaliterations(int agentIterations)
+	{
+		totalNumIterations.addAndGet(agentIterations);
+	}
+
+	public int getTotalGain() {
+		return totalGain.get();
+	}
+
+	public int getTotalIterations() {
+		return totalNumIterations.get();
+	}
+
+
 }

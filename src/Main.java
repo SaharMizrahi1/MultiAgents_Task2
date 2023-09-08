@@ -81,8 +81,8 @@ public class Main {
 			}
 
 			// Accumulate values for this run
-			int numIterations = 0; // Replace with actual value
-			double SW = 0.0; // Replace with actual value
+			int numIterations = mailer.getTotalIterations(); // Replace with actual value
+			double SW = mailer.getTotalGain(); // total gain of agents for each game from 100 games
 
 			totalNumIterations += numIterations;
 			totalSW += SW;
