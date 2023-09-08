@@ -30,6 +30,8 @@ public class Main {
 
 	// Run the Best-Response algorithm for 100 random problems
 		for (int run = 0; run < 100; run++) {
+
+			System.out.println("game number: "+run);
 		// generate and print CSP
 			Generator gen = new Generator(n, p1, Type, pw);
 			Game game = gen.generateGame();

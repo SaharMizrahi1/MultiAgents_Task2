@@ -51,6 +51,7 @@ public class Agent implements Runnable {
 		while (true) {
 
 			numIterations++; // Increment round count
+			System.out.println("id: "+id+" round: "+numIterations);
 
 			// Create a message containing the current strategy
 			Message strategyMessage = new AssignmentMessage(id, strategy);
@@ -93,6 +94,8 @@ public class Agent implements Runnable {
 		//totalAgentGains.addAndGet(agentGain); //should continue ?
 		mailer.addToTotalGain(agentGain);
 		mailer.addToTotaliterations(numIterations);
+
+
 
 		}
 
