@@ -178,15 +178,19 @@ public class Agent implements Runnable {
 		}
 		if(payoff0.get()>payoff1.get())
 		{
+			agentGain=payoff0.get();
 			if (game instanceof PrisonersDilemma)
 				return "Defect";
 			else
 				return "Theatre";
 		}
-		else if(game instanceof PrisonersDilemma)
-			return "Cooperate";
+		else {
+			agentGain=payoff1.get();
+			if (game instanceof PrisonersDilemma)
+				return "Cooperate";
 			else
 				return "Soccer";
+		}
 
 
 

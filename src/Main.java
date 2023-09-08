@@ -21,13 +21,18 @@ public class Main {
 				System.out.println("Missing argument pw for BoS type.");
 				return;
 			}
+		}
+
+		// Initialize variables to accumulate values
+		int totalNumIterations = 0;
+		double totalSW = 0.0;
 
 
-			// generate and print CSP
+	// Run the Best-Response algorithm for 100 random problems
+		for (int run = 0; run < 100; run++) {
+		// generate and print CSP
 			Generator gen = new Generator(n, p1, Type, pw);
-			//MASP masp = gen.generateMASP();
 			Game game = gen.generateGame();
-			//masp.print();
 
 			// initialize mailer
 			Mailer mailer = new Mailer();
@@ -36,13 +41,8 @@ public class Main {
 			}
 
 			List<Agent> agents = new ArrayList<>(); // Store agents in a list
-
 			// create agents
-
 			for (int i = 0; i < n; i++) {
-				// use the csp to extract the private information of each agent
-				//SortedSet<Integer> AgentNeighbors = game.neighborsIDOf(i);
-
 				// Create an Agent and pass its neighbor list
 				Agent agent;
 
@@ -79,6 +79,22 @@ public class Main {
 			for (Thread t : threads) {
 				t.join();
 			}
+
+			// Accumulate values for this run
+			int numIterations = 0; // Replace with actual value
+			double SW = 0.0; // Replace with actual value
+
+			totalNumIterations += numIterations;
+			totalSW += SW;
 		}
+
+		// Calculate average values
+		double averageNumIterations = (double) totalNumIterations / 100.0;
+		double averageSW = totalSW / 100.0;
+
+		// Print or report the average values
+		System.out.println("Average Num_Iterations=" + averageNumIterations);
+		System.out.println("Average SW=" + averageSW);
+
 	}
 }
