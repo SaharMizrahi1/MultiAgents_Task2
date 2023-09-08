@@ -132,6 +132,8 @@ public class Agent implements Runnable {
 	private String computeBestResponse(HashMap<Integer, String> agentView)
 	{
 		String bestResponse = strategy; // Initialize with the agent's current strategy
+		AtomicInteger payoff0 = new AtomicInteger(0);
+		AtomicInteger payoff1 = new AtomicInteger(0);
 		// Access the game-specific matrix based on the agent's game and gender
 		VarTuple[][] matrix = null;
 
@@ -162,24 +164,29 @@ public class Agent implements Runnable {
 				neighborIndex = ((PrisonersDilemma) game).getStrategyIndex(neighborStrategy);
 				int value0=matrix[0][neighborIndex].getI();
 				int value1=matrix[1][neighborIndex].getI();
-				if(value1>value0)
-					bestResponse="Cooperate";
-				else
-					bestResponse="Defect";
-
+				payoff0.addAndGet(value0);
+				payoff1.addAndGet(value1);
 			}
 			else {
 				neighborIndex = ((BattleOfSexes) game).getStrategyIndex(neighborStrategy);
 				int value0 = matrix[0][neighborIndex].getI();
 				int value1 = matrix[1][neighborIndex].getI();
-				if (value1 > value0)
-					bestResponse="Soccer";
-				else
-					bestResponse="Theatre";
+				payoff0.addAndGet(value0);
+				payoff1.addAndGet(value1);
 			}
 
 		}
-		return bestResponse;
+		if(payoff0.get()>payoff1.get())
+		{
+			if (game instanceof PrisonersDilemma)
+				return "Defect";
+			else
+				return "Theatre";
+		}
+		else if(game instanceof PrisonersDilemma)
+			return "Cooperate";
+			else
+				return "Soccer";
 
 
 
