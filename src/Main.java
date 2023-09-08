@@ -48,12 +48,12 @@ public class Main {
 
 				if (Type.equals("BoS")) {//if bos then we need to create husbands and wives:
 					if (Math.random() <= pw) {
-						agent = new Wife(i, mailer, n);
+						agent = new Wife(i, mailer, n, game);
 					} else {
-						agent = new Husband(i, mailer, n);
+						agent = new Husband(i, mailer, n, game);
 					}
 				} else {
-					agent = new Agent(i, mailer, n);
+					agent = new Agent(i, mailer, n,game);
 				}
 
 				agents.add(agent); // Add the agent to the list

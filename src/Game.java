@@ -1,7 +1,4 @@
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Game {
 
@@ -22,8 +19,8 @@ public class Game {
         return neighbors;
     }
 
-    public TreeSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
-        TreeSet<Agent> neighbors = new TreeSet<Agent>();
+    public HashSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
+        HashSet<Agent> neighbors = new HashSet<Agent>();
 
         for (Agent agent: agents)
         {

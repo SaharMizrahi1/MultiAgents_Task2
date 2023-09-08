@@ -1,9 +1,6 @@
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Agent implements Runnable {
@@ -12,7 +9,7 @@ public class Agent implements Runnable {
 	private int agents; //number of agents - n
 	private Mailer mailer; //reference to mailer
 	//SortedSet<Integer> neighborsid; //ids of all neighbors of this agent
-	TreeSet<Agent> neighbors= new TreeSet<Agent>(); //ids of all neighbors of this agent
+	HashSet<Agent> neighbors= new HashSet<Agent>(); //ids of all neighbors of this agent
 
 	// New fields by Sahar for agent's strategy, AgentView, Agent's Gain
 	private String strategy; //agent strategy
@@ -20,7 +17,7 @@ public class Agent implements Runnable {
 	private int agentGain; //sum of the agent gain from all turns in the current round
 
 	private Game game; //the game being played
-	private int numIterations=0;
+	private int numIterations;
 
 
 
@@ -32,11 +29,12 @@ public class Agent implements Runnable {
 	 * n - Total number of agents in the system.
 	 * strategy - The current strategy of the agent.
 	 */
-	public Agent(int id, Mailer mailer, int n) {
+	public Agent(int id, Mailer mailer, int n, Game game) {
 		this.id = id;
 		this.mailer = mailer;
 		//this.neighbors=neighbors;
 		this.agents = n;
+		this.game=game;
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
 
 	}
@@ -228,7 +226,7 @@ public class Agent implements Runnable {
 		return id;
 	}
 
-	public void setNeighbors(TreeSet<Agent> neighbors) {
+	public void setNeighbors(HashSet<Agent> neighbors) {
 		this.neighbors = neighbors;
 	}
 
