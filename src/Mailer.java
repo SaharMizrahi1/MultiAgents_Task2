@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Mailer {
 
 	private AtomicInteger totalNumIterations= new AtomicInteger(0);
+
 	private AtomicInteger totalGain = new AtomicInteger(0);
 	// maps between agents and their mailboxes
 	private HashMap<Integer, List<Message>> map = new HashMap<>();
@@ -50,6 +51,7 @@ public class Mailer {
 		totalGain.addAndGet(agentGain);
 	}
 	public void addToTotaliterations(int agentIterations)
+
 	{
 		totalNumIterations.addAndGet(agentIterations);
 	}

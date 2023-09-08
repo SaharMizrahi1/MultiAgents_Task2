@@ -93,8 +93,8 @@ public class Main {
 		double averageSW = totalSW / 100.0;
 
 		// Print or report the average values
-		System.out.println("Average Num_Iterations=" + averageNumIterations);
-		System.out.println("Average SW=" + averageSW);
+		System.out.println("Average Num_Iterations=" + averageNumIterations/n);
+		System.out.println("Average SW=" + averageSW/n);
 
 	}
 }
