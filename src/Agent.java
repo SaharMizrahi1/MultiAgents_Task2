@@ -10,7 +10,8 @@ public class Agent implements Runnable {
 	private int id; //agent id
 	private int agents; //number of agents - n
 	private Mailer mailer; //reference to mailer
-	SortedSet<Integer> neighbors; //ids of all neighbors of this agent
+	//SortedSet<Integer> neighborsid; //ids of all neighbors of this agent
+	SortedSet<Agent> neighbors; //ids of all neighbors of this agent
 
 	// New fields by Sahar for agent's strategy, AgentView, Agent's Gain
 	private String strategy; //agent strategy
@@ -30,10 +31,10 @@ public class Agent implements Runnable {
 	 * n - Total number of agents in the system.
 	 * strategy - The current strategy of the agent.
 	 */
-	public Agent(int id, Mailer mailer, SortedSet<Integer> neighbors, int n) {
+	public Agent(int id, Mailer mailer, int n) {
 		this.id = id;
 		this.mailer = mailer;
-		this.neighbors=neighbors;
+		//this.neighbors=neighbors;
 		this.agents = n;
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
 
@@ -57,8 +58,9 @@ public class Agent implements Runnable {
 			Message strategyMessage = new AssignmentMessage(id, strategy);
 
 			// Send the strategy message to all neighbors
-			for (int neighbor : neighbors) {
-				mailer.send(neighbor, strategyMessage);
+			for (Agent neighbor : neighbors) {
+				int neighborId= neighbor.getId();
+				mailer.send(neighborId, strategyMessage);
 			}
 
 			// Collect the strategies of neighboring agents
@@ -174,8 +176,13 @@ public class Agent implements Runnable {
 		}
 	}
 
+	public int getId() {
+		return id;
+	}
 
-
+	public void setNeighbors(SortedSet<Agent> neighbors) {
+		this.neighbors = neighbors;
+	}
 }
 
 

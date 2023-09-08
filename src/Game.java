@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -12,7 +13,7 @@ public class Game {
 
     }
 
-    public SortedSet<Integer> neighborsOf(int i) { //returns a set of agent it's neighbors
+    public SortedSet<Integer> neighborsIDOf(int i) { //returns a set of agent it's neighbors
         SortedSet<Integer> neighbors = new TreeSet<Integer>();
         for (int k = 0; k < network.length; k++) {
             for (int j = k + 1; j < network.length; j++) {
@@ -25,6 +26,23 @@ public class Game {
         }
         return neighbors;
     }
+
+    public SortedSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
+        SortedSet<Agent> neighbors = new TreeSet<Agent>();
+
+        for (Agent agent: agents)
+        {
+            if(neighborsIDOf(i).contains(agent.getId()))
+            {
+                neighbors.add(agent);
+            }
+        }
+
+        return neighbors;
+    }
+
+
+
 
     public VarTuple[][] getMatrix() {
         return matrix;

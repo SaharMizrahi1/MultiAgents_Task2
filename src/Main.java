@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.SortedSet;
 
 public class Main {
@@ -34,26 +35,39 @@ public class Main {
 				mailer.put(i);
 			}
 
+			List<Agent> agents = new ArrayList<>(); // Store agents in a list
+
 			// create agents
-			ArrayList<Thread> threads = new ArrayList<Thread>();
+
 			for (int i = 0; i < n; i++) {
 				// use the csp to extract the private information of each agent
-				SortedSet<Integer> AgentNeighbors = game.neighborsOf(i);
-				//if bos then we need to create husbands and wives:
-				if (Type.equals("BoS")) {
-					if (Math.random() <= pw) {
-						Thread t = new Thread(new Wife(i, mailer, AgentNeighbors, n)); //fix the constructor
-						threads.add(t);
-					} else {
-						Thread t = new Thread(new Husband(i, mailer, AgentNeighbors, n)); //fix the constructor
-						threads.add(t);
-					}
+				//SortedSet<Integer> AgentNeighbors = game.neighborsIDOf(i);
 
+				// Create an Agent and pass its neighbor list
+				Agent agent;
+
+				if (Type.equals("BoS")) {//if bos then we need to create husbands and wives:
+					if (Math.random() <= pw) {
+						agent = new Wife(i, mailer, n);
+					} else {
+						agent = new Husband(i, mailer, n);
+					}
 				} else {
-					Thread t = new Thread(new Agent(i, mailer, AgentNeighbors, n));
-					threads.add(t);
+					agent = new Agent(i, mailer, n);
 				}
 
+				agents.add(agent); // Add the agent to the list
+			}
+
+
+
+
+			// Run agents as threads
+			ArrayList<Thread> threads = new ArrayList<Thread>();
+			for (Agent agent : agents) {
+				agent.setNeighbors(game.neighborsOf(agent.getId(),agents));
+				Thread t = new Thread(agent);
+				threads.add(t);
 			}
 
 			// run agents as threads
