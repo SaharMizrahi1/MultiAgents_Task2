@@ -136,19 +136,23 @@ public class Agent implements Runnable {
 		VarTuple[][] matrix = null;
 
 		if (game instanceof BattleOfSexes) {
-			for(String neighborStrategy: agentView.values())
+			for( Agent neighbor : neighbors)
 			{
 				if(this instanceof Husband)
 				{
-					if()
+					if(neighbor instanceof Husband)
+						matrix=((BattleOfSexes) game).getMan_man();
+					else
+						matrix= game.getMatrix();
+				}
+				else{
+					if(neighbor instanceof Husband)
+						matrix= game.getMatrix();
+					else
+						matrix= ((BattleOfSexes) game).getWoman_woman();
 				}
 			}
-			BattleOfSexes bosGame = (BattleOfSexes) game;
-			if (isMan()) {
-				matrix = bosGame.getManMatrix();
-			} else {
-				matrix = bosGame.getWomanMatrix();
-			}
+
 		}
 
 
