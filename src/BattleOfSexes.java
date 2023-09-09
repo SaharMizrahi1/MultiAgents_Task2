@@ -8,6 +8,7 @@ public class BattleOfSexes extends Game{
     public BattleOfSexes(boolean[][] network) {
         super();
         this.network=network;
+        initializeMan_Woman();
         initializeWoman_man();
         initializeMan_Man();
         initializeWoman_Woman();
@@ -21,10 +22,10 @@ public class BattleOfSexes extends Game{
     }
 
     private void initializeMan_Woman() {
-        woman_man[0][0] = new VarTuple(1, 3);
-        woman_man[0][1] = new VarTuple(0, 0);
-        woman_man[1][0] = new VarTuple(0, 0);
-        woman_man[1][1] = new VarTuple(3, 1);
+        man_woman[0][0] = new VarTuple(1, 3);
+        man_woman[0][1] = new VarTuple(0, 0);
+        man_woman[1][0] = new VarTuple(0, 0);
+        man_woman[1][1] = new VarTuple(3, 1);
     }
 
     private void initializeWoman_Woman() {
