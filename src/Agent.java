@@ -101,37 +101,6 @@ public class Agent implements Runnable {
 		}
 
 
-
-
-
-		//By Sahar
-		// Update Agent's Gain
-		//agentGain = success; // Added: Store the agent's gain
-
-		// Update AgentView
-
-		//Yair ? not sure if delete
-		
-//			System.out.println("id: " + id + ", assignment: " + assignment + ", successful constraint checks: " + success);
-//
-//		if (id != agents - 1) {
-//			ChecksMessage message = new ChecksMessage(success);
-//			mailer.send(agents - 1, message);
-//		}
-//		else {
-//			int count = 0;
-//			while (count < agents - 1) {
-//				ChecksMessage message = (ChecksMessage) mailer.readOne(id);
-//				if (message == null) {
-//					continue;
-//				}
-//				count++;
-//				success += message.getChecks();
-//			}
-//
-//			System.out.println("total number of constraint checks: " + success);
-//		}
-
 	//compute the best response according to the neighbors assignments from the last round
 	private String computeBestResponse(HashMap<Integer, String> agentView)
 	{
