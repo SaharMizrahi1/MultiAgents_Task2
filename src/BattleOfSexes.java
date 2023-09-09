@@ -60,8 +60,8 @@ public class BattleOfSexes extends Game{
     public int getStrategyIndex(String strategy) {
         if(strategy.equals("Soccer"))
             return 1;
-        else
-            return 0;
+        return 0;
+
 
     }
 }

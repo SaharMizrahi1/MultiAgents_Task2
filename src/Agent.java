@@ -93,7 +93,8 @@ public class Agent implements Runnable {
 
 		//totalAgentGains.addAndGet(agentGain); //should continue ?
 		mailer.addToTotalGain(agentGain);
-		mailer.addToTotaliterations(numIterations);
+		//mailer.addToTotaliterations(numIterations);
+		mailer.determineCurrentIterations(numIterations);
 
 
 
@@ -138,7 +139,7 @@ public class Agent implements Runnable {
 		AtomicInteger payoff0 = new AtomicInteger(0);
 		AtomicInteger payoff1 = new AtomicInteger(0);
 		// Access the game-specific matrix based on the agent's game and gender
-		VarTuple[][] matrix = null;
+		VarTuple[][] matrix;
 
 		for( Agent neighbor : neighbors)
 		{
@@ -146,21 +147,39 @@ public class Agent implements Runnable {
 			{
 				if(this instanceof Husband)
 				{
-					if(neighbor instanceof Husband)
-						matrix=((BattleOfSexes) game).getMan_man();
-					else
-						matrix= ((BattleOfSexes) game).getMan_woman();
+					System.out.println("agent - husband");
+					if(neighbor instanceof Husband) {
+						System.out.println("neighbor - husband");
+
+						matrix = ((BattleOfSexes) game).getMan_man();
+					}
+					else {
+						matrix = ((BattleOfSexes) game).getMan_woman();
+						System.out.println("neighbor - wife");
+
+					}
 				}
 				else{
-					if(neighbor instanceof Husband)
-						matrix= ((BattleOfSexes) game).getWoman_man();
-					else
-						matrix= ((BattleOfSexes) game).getWoman_woman();
+					System.out.println("agent - wife");
+					if(neighbor instanceof Husband) {
+						matrix = ((BattleOfSexes) game).getWoman_man();
+						System.out.println("neighbor - husband");
+
+					}
+					else {
+						matrix = ((BattleOfSexes) game).getWoman_woman();
+						System.out.println("neighbor - wife");
+
+					}
 				}
 			}
 			else
 				matrix=((PrisonersDilemma)game).getMatrix(); //instanceof PD game
 
+			if (matrix == null) {
+				System.out.println("null matrix");
+				// Your code for accessing the matrix and performing calculations
+			}
 			String neighborStrategy=agentView.get(neighbor.getId());
 			int neighborIndex;
 			if(game instanceof PrisonersDilemma) {
@@ -171,7 +190,9 @@ public class Agent implements Runnable {
 				payoff1.addAndGet(value1);
 			}
 			else {
-				neighborIndex = ((BattleOfSexes) game).getStrategyIndex(neighborStrategy);
+				neighborIndex = game.getStrategyIndex(neighborStrategy);//changed
+				System.out.println(neighborStrategy);
+				System.out.println(neighborIndex);
 				int value0 = matrix[0][neighborIndex].getI();
 				int value1 = matrix[1][neighborIndex].getI();
 				payoff0.addAndGet(value0);
