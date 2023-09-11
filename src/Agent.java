@@ -17,7 +17,7 @@ public class Agent implements Runnable {
 	private int agentGain; //sum of the agent gain from all turns in the current round
 
 	private Game game; //the game being played
-	private int numIterations;
+	private int numIterations=0;
 
 
 
@@ -36,7 +36,7 @@ public class Agent implements Runnable {
 		this.agents = n;
 		this.game=game;
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
-
+		//numIterations += roundOfRandomStrategy; // Add roundOfRandomStrategy to numIterations
 	}
 
 
@@ -199,28 +199,60 @@ public class Agent implements Runnable {
 
 	}
 
+//	private void initializeRandomStrategy() {
+//		Random random = new Random();
+//
+//		if (game instanceof BattleOfSexes) {
+//			// Battle of the Sexes game - Initialize with "Theatre" or "Soccer"
+//			String[] bosStrategies = { "Theatre", "Soccer" };
+//			int randomIndex = random.nextInt(bosStrategies.length);
+//			strategy = bosStrategies[randomIndex];
+//
+//		} else if (game instanceof PrisonersDilemma) {
+//			// Prisoner's Dilemma game - Initialize with "Cooperate" or "Defect"
+//			String[] pdStrategies = { "Cooperate", "Defect" };
+//			int randomIndex = random.nextInt(pdStrategies.length);
+//			strategy = pdStrategies[randomIndex];
+//		} else {
+//			// Handle other game types or default behavior
+//			// You can set a default strategy here if needed
+//
+//			return;
+//
+//		}
+//
+//	}
+
+
+	//function with changes for the bos Num_Iterations by Sahar
 	private void initializeRandomStrategy() {
+
 		Random random = new Random();
 
 		if (game instanceof BattleOfSexes) {
+			int roundOfRandomStrategy = 0;
 			// Battle of the Sexes game - Initialize with "Theatre" or "Soccer"
 			String[] bosStrategies = { "Theatre", "Soccer" };
 			int randomIndex = random.nextInt(bosStrategies.length);
 			strategy = bosStrategies[randomIndex];
-
+			roundOfRandomStrategy++; // Increment roundOfRandomStrategy when a random strategy is chosen
+			numIterations += roundOfRandomStrategy; // Add roundOfRandomStrategy to numIterations
 		} else if (game instanceof PrisonersDilemma) {
 			// Prisoner's Dilemma game - Initialize with "Cooperate" or "Defect"
 			String[] pdStrategies = { "Cooperate", "Defect" };
 			int randomIndex = random.nextInt(pdStrategies.length);
 			strategy = pdStrategies[randomIndex];
+
 		} else {
 			// Handle other game types or default behavior
 			// You can set a default strategy here if needed
-
 			return;
-
 		}
+
 	}
+
+
+
 
 	public int getId() {
 		return id;
