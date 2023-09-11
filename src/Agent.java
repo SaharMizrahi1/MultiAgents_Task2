@@ -77,9 +77,11 @@ public class Agent implements Runnable {
 
 			// Compute the best response strategy based on neighboring strategies
 			String bestResponse = computeBestResponse(agentView); //need to write function
+
 			// Update agent's strategy and check if it has changed
 			if (!strategy.equals(bestResponse)) {
 				strategy = bestResponse;
+				System.out.println("strategy changed to :"+bestResponse +"Id: "+id);
 				hasChangedStrategy = true;
 			} else {
 				hasChangedStrategy = false;
@@ -87,6 +89,7 @@ public class Agent implements Runnable {
 
 			// Terminate if no agent changes strategy in a round
 			if (!hasChangedStrategy) {
+				System.out.println("strategy didnt changed , it is: :"+strategy);
 				break;
 			}
 		}
@@ -112,32 +115,36 @@ public class Agent implements Runnable {
 
 		for( Agent neighbor : neighbors)
 		{
+			System.out.println("agent strategy "+ strategy+"Id: "+id);
+			System.out.println("neighbor strategy "+ neighbor.strategy+"Id: "+neighbor.id);
+
 			if (game instanceof BattleOfSexes)
 			{
 				if(this instanceof Husband)
 				{
-					System.out.println("agent - husband");
+					System.out.println("agent " +id+" - husband");
+
 					if(neighbor instanceof Husband) {
-						System.out.println("neighbor - husband");
+						System.out.println("neighbor " +neighbor.id+ "- husband");
 
 						matrix = ((BattleOfSexes) game).getMan_man();
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getMan_woman();
-						System.out.println("neighbor - wife");
+						System.out.println("neighbor " +neighbor.id+ "- wife");
 
 					}
 				}
 				else{
-					System.out.println("agent - wife");
+					System.out.println("agent " +id+ "- wife");
 					if(neighbor instanceof Husband) {
 						matrix = ((BattleOfSexes) game).getWoman_man();
-						System.out.println("neighbor - husband");
+						System.out.println("neighbor " +neighbor.id+ "- husband");
 
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getWoman_woman();
-						System.out.println("neighbor - wife");
+						System.out.println("neighbor "+ neighbor.id+ "- wife");
 
 					}
 				}
@@ -159,9 +166,7 @@ public class Agent implements Runnable {
 				payoff1.addAndGet(value1);
 			}
 			else {
-				neighborIndex = game.getStrategyIndex(neighborStrategy);//changed
-				System.out.println(neighborStrategy);
-				System.out.println(neighborIndex);
+				neighborIndex = game.getStrategyIndex(neighborStrategy);
 				int value0 = matrix[0][neighborIndex].getI();
 				int value1 = matrix[1][neighborIndex].getI();
 				payoff0.addAndGet(value0);
@@ -202,6 +207,7 @@ public class Agent implements Runnable {
 			String[] bosStrategies = { "Theatre", "Soccer" };
 			int randomIndex = random.nextInt(bosStrategies.length);
 			strategy = bosStrategies[randomIndex];
+
 		} else if (game instanceof PrisonersDilemma) {
 			// Prisoner's Dilemma game - Initialize with "Cooperate" or "Defect"
 			String[] pdStrategies = { "Cooperate", "Defect" };
@@ -210,6 +216,7 @@ public class Agent implements Runnable {
 		} else {
 			// Handle other game types or default behavior
 			// You can set a default strategy here if needed
+
 			return;
 
 		}
