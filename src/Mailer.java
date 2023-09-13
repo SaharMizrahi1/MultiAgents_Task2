@@ -66,11 +66,15 @@ public class Mailer {
 //		return totalNumIterations.get();
 //	}
 
-	public int getTotalIterations() {
-		this.totalNumIterations.addAndGet(this.currentIterations.get());
-		return totalNumIterations.get();
-	}
+//	public int getTotalIterations() {
+//		this.totalNumIterations.addAndGet(this.currentIterations.get());
+//		return totalNumIterations.get();
+//	}
 
+	public int getCurrentIterations(){
+		return this.currentIterations.get();
+
+	}
 
 	public void determineCurrentIterations(int agentIterations) {
 		if(agentIterations > this.currentIterations.get()) {
