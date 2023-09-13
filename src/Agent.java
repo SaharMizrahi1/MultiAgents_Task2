@@ -36,7 +36,6 @@ public class Agent implements Runnable {
 		this.agents = n;
 		this.game=game;
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
-		//numIterations += roundOfRandomStrategy; // Add roundOfRandomStrategy to numIterations
 	}
 
 
@@ -51,7 +50,7 @@ public class Agent implements Runnable {
 		while (true) {
 
 			numIterations++; // Increment round count
-			System.out.println("id: "+id+" round: "+numIterations);
+			//System.out.println("id: "+id+" round: "+numIterations);
 
 			// Create a message containing the current strategy
 			Message strategyMessage = new AssignmentMessage(id, strategy);
@@ -66,6 +65,11 @@ public class Agent implements Runnable {
 			// Continue collecting until we have received all neighbors' strategies
 			while (agentView.size() < neighbors.size()) {
 				// Read a strategy message from the mailbox
+				try {
+					Thread.sleep(2);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
 				AssignmentMessage receivedMessage = (AssignmentMessage) mailer.readOne(id);
 
 				if (receivedMessage != null) {
@@ -81,7 +85,7 @@ public class Agent implements Runnable {
 			// Update agent's strategy and check if it has changed
 			if (!strategy.equals(bestResponse)) {
 				strategy = bestResponse;
-				System.out.println("strategy changed to :"+bestResponse +"Id: "+id);
+				//System.out.println("strategy changed to :"+bestResponse +"Id: "+id);
 				hasChangedStrategy = true;
 			} else {
 				hasChangedStrategy = false;
@@ -89,7 +93,7 @@ public class Agent implements Runnable {
 
 			// Terminate if no agent changes strategy in a round
 			if (!hasChangedStrategy) {
-				System.out.println("strategy didnt changed , it is: :"+strategy);
+				//System.out.println("strategy didnt changed , it is: :"+strategy);
 				break;
 			}
 		}
@@ -115,36 +119,36 @@ public class Agent implements Runnable {
 
 		for( Agent neighbor : neighbors)
 		{
-			System.out.println("agent strategy "+ strategy+"Id: "+id);
-			System.out.println("neighbor strategy "+ neighbor.strategy+"Id: "+neighbor.id);
+			//System.out.println("agent strategy "+ strategy+"Id: "+id);
+			//System.out.println("neighbor strategy "+ neighbor.strategy+"Id: "+neighbor.id);
 
 			if (game instanceof BattleOfSexes)
 			{
 				if(this instanceof Husband)
 				{
-					System.out.println("agent " +id+" - husband");
+					//System.out.println("agent " +id+" - husband");
 
 					if(neighbor instanceof Husband) {
-						System.out.println("neighbor " +neighbor.id+ "- husband");
+						//System.out.println("neighbor " +neighbor.id+ "- husband");
 
 						matrix = ((BattleOfSexes) game).getMan_man();
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getMan_woman();
-						System.out.println("neighbor " +neighbor.id+ "- wife");
+						//System.out.println("neighbor " +neighbor.id+ "- wife");
 
 					}
 				}
 				else{
-					System.out.println("agent " +id+ "- wife");
+					//System.out.println("agent " +id+ "- wife");
 					if(neighbor instanceof Husband) {
 						matrix = ((BattleOfSexes) game).getWoman_man();
-						System.out.println("neighbor " +neighbor.id+ "- husband");
+						//System.out.println("neighbor " +neighbor.id+ "- husband");
 
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getWoman_woman();
-						System.out.println("neighbor "+ neighbor.id+ "- wife");
+						//System.out.println("neighbor "+ neighbor.id+ "- wife");
 
 					}
 				}
@@ -190,69 +194,31 @@ public class Agent implements Runnable {
 				return "Soccer";
 		}
 
-
-
-
-
-
-
-
 	}
 
-//	private void initializeRandomStrategy() {
-//		Random random = new Random();
-//
-//		if (game instanceof BattleOfSexes) {
-//			// Battle of the Sexes game - Initialize with "Theatre" or "Soccer"
-//			String[] bosStrategies = { "Theatre", "Soccer" };
-//			int randomIndex = random.nextInt(bosStrategies.length);
-//			strategy = bosStrategies[randomIndex];
-//
-//		} else if (game instanceof PrisonersDilemma) {
-//			// Prisoner's Dilemma game - Initialize with "Cooperate" or "Defect"
-//			String[] pdStrategies = { "Cooperate", "Defect" };
-//			int randomIndex = random.nextInt(pdStrategies.length);
-//			strategy = pdStrategies[randomIndex];
-//		} else {
-//			// Handle other game types or default behavior
-//			// You can set a default strategy here if needed
-//
-//			return;
-//
-//		}
-//
-//	}
-
-
-	//function with changes for the bos Num_Iterations by Sahar
 	private void initializeRandomStrategy() {
-
 		Random random = new Random();
 
 		if (game instanceof BattleOfSexes) {
-			int roundOfRandomStrategy = 0;
 			// Battle of the Sexes game - Initialize with "Theatre" or "Soccer"
 			String[] bosStrategies = { "Theatre", "Soccer" };
 			int randomIndex = random.nextInt(bosStrategies.length);
 			strategy = bosStrategies[randomIndex];
-			roundOfRandomStrategy++; // Increment roundOfRandomStrategy when a random strategy is chosen
-			numIterations += roundOfRandomStrategy; // Add roundOfRandomStrategy to numIterations
+
 		} else if (game instanceof PrisonersDilemma) {
 			// Prisoner's Dilemma game - Initialize with "Cooperate" or "Defect"
 			String[] pdStrategies = { "Cooperate", "Defect" };
 			int randomIndex = random.nextInt(pdStrategies.length);
 			strategy = pdStrategies[randomIndex];
-
 		} else {
 			// Handle other game types or default behavior
 			// You can set a default strategy here if needed
+
 			return;
+
 		}
 
 	}
-
-
-
 
 	public int getId() {
 		return id;
