@@ -5,7 +5,7 @@ public class Game {
     boolean[][] network;
 
 
-    public SortedSet<Integer> neighborsIDOf(int i) { //returns a set of agent it's neighbors
+    public SortedSet<Integer> neighborsIDOf(int i) { //returns a set of the ids of the agent neighbors
         SortedSet<Integer> neighbors = new TreeSet<Integer>();
         for (int k = 0; k < network.length; k++) {
             for (int j = k + 1; j < network.length; j++) {
@@ -19,7 +19,7 @@ public class Game {
         return neighbors;
     }
 
-    public HashSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agent it's neighbors
+    public HashSet<Agent> neighborsOf(int i, List<Agent> agents) { //returns a set of agents that are neighbors of i (Agent object)
         HashSet<Agent> neighbors = new HashSet<Agent>();
 
         for (Agent agent: agents)

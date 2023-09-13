@@ -11,7 +11,6 @@ public class Main {
 		int n = Integer.valueOf(args[0]).intValue();
 		String Type = args[1];// PD/BoS
 		double p1 = Double.valueOf(args[2]).doubleValue();
-
 		double pw = 0.0;
 
 		if (Type.equals("BoS")) { //BoS is selected
@@ -32,7 +31,7 @@ public class Main {
 		for (int run = 0; run < 100; run++) {
 
 			System.out.println("game number: "+run);
-		// generate and print CSP
+		// generate game
 			Generator gen = new Generator(n, p1, Type, pw);
 			Game game = gen.generateGame();
 
@@ -83,7 +82,7 @@ public class Main {
 			}
 
 			// Accumulate values for this run
-			int numIterations = mailer.getCurrentIterations(); // Replace with actual value
+			int numIterations = mailer.getCurrentIterations();
 			double SW = mailer.getTotalGain(); // total gain of agents for each game from 100 games
 
 			totalNumIterations += numIterations;
@@ -95,7 +94,7 @@ public class Main {
 		double averageNumIterations = (double) totalNumIterations / 100.0;
 		double averageSW = totalSW / 100.0;
 
-		// Print or report the average values
+		// Print the average values
 		System.out.println("Average Num_Iterations=" + averageNumIterations);
 		System.out.println("Average SW=" + averageSW);
 

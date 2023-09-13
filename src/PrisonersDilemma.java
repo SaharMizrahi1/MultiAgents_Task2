@@ -14,7 +14,7 @@ public class PrisonersDilemma extends Game {
         matrix[1][1] = new VarTuple(8, 8);
     }
 
-    public int getStrategyIndex(String strategy) {
+    public int getStrategyIndex(String strategy) { //code the string strategy into binary values
         if(strategy.equals("Cooperate"))
             return 1;
         else

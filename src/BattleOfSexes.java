@@ -1,9 +1,9 @@
 public class BattleOfSexes extends Game{
 
-    private VarTuple [][] man_woman = new VarTuple[2][2];
-    private VarTuple [][] woman_man = new VarTuple[2][2];
-    private VarTuple [][] man_man = new VarTuple[2][2];
-    private VarTuple [][] woman_woman = new VarTuple[2][2];
+    private VarTuple [][] man_woman = new VarTuple[2][2]; //rows=Husband columns=Wife
+    private VarTuple [][] woman_man = new VarTuple[2][2]; //rows=Wife columns=Husband
+    private VarTuple [][] man_man = new VarTuple[2][2];  //rows=Husband columns=Husband
+    private VarTuple [][] woman_woman = new VarTuple[2][2]; //rows=Wife columns=Wife
 
     public BattleOfSexes(boolean[][] network) {
         super();
@@ -58,7 +58,7 @@ public class BattleOfSexes extends Game{
         return woman_man;
     }
 
-    public int getStrategyIndex(String strategy) {
+    public int getStrategyIndex(String strategy) { //code the string strategy into binary values
         if(strategy.equals("Soccer"))
             return 1;
         return 0;

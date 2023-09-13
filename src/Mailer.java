@@ -9,11 +9,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Mailer {
 
-	private AtomicInteger totalNumIterations= new AtomicInteger(0);
-	private AtomicInteger currentIterations = new AtomicInteger(0);
+	private AtomicInteger totalNumIterations= new AtomicInteger(0); //total iterations
+	private AtomicInteger currentIterations = new AtomicInteger(0); //iterations of current round
 
 
-	private AtomicInteger totalGain = new AtomicInteger(0);
+	private AtomicInteger totalGain = new AtomicInteger(0);//total gain of all agents
+
 	// maps between agents and their mailboxes
 	private HashMap<Integer, List<Message>> map = new HashMap<>();
 	
@@ -62,14 +63,6 @@ public class Mailer {
 		return totalGain.get();
 	}
 
-//	public int getTotalIterations() {
-//		return totalNumIterations.get();
-//	}
-
-//	public int getTotalIterations() {
-//		this.totalNumIterations.addAndGet(this.currentIterations.get());
-//		return totalNumIterations.get();
-//	}
 
 	public int getCurrentIterations(){
 		return this.currentIterations.get();

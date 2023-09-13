@@ -8,10 +8,7 @@ public class Agent implements Runnable {
 	private int id; //agent id
 	private int agents; //number of agents - n
 	private Mailer mailer; //reference to mailer
-	//SortedSet<Integer> neighborsid; //ids of all neighbors of this agent
 	HashSet<Agent> neighbors= new HashSet<Agent>(); //ids of all neighbors of this agent
-
-	// New fields by Sahar for agent's strategy, AgentView, Agent's Gain
 	private String strategy; //agent strategy
 	private HashMap<Integer, String> agentView = new HashMap<Integer, String>(); //holds ids of neighbors and their strategies
 	private int agentGain; //sum of the agent gain from all turns in the current round
@@ -25,23 +22,15 @@ public class Agent implements Runnable {
 	 * Constructor parameters:
 	 * id - Agent's unique identifier.
 	 * mailer - A reference to the mailer for communication.
-	 * neighbors - A set of IDs representing neighboring agents.
 	 * n - Total number of agents in the system.
-	 * strategy - The current strategy of the agent.
+	 * game - A reference to the game being played.
 	 */
 	public Agent(int id, Mailer mailer, int n, Game game) {
 		this.id = id;
 		this.mailer = mailer;
-		//this.neighbors=neighbors;
 		this.agents = n;
 		this.game=game;
 		initializeRandomStrategy(); //each agent starts with a random strategy based on the game type
-	}
-
-
-	// By Sahar Getter for Agent's Gain
-	public int getAgentGain() {
-		return agentGain;
 	}
 
 	@Override
@@ -50,7 +39,6 @@ public class Agent implements Runnable {
 		while (true) {
 
 			numIterations++; // Increment round count
-			//System.out.println("id: "+id+" round: "+numIterations);
 
 			// Create a message containing the current strategy
 			Message strategyMessage = new AssignmentMessage(id, strategy);
@@ -85,7 +73,6 @@ public class Agent implements Runnable {
 			// Update agent's strategy and check if it has changed
 			if (!strategy.equals(bestResponse)) {
 				strategy = bestResponse;
-				//System.out.println("strategy changed to :"+bestResponse +"Id: "+id);
 				hasChangedStrategy = true;
 			} else {
 				hasChangedStrategy = false;
@@ -93,14 +80,11 @@ public class Agent implements Runnable {
 
 			// Terminate if no agent changes strategy in a round
 			if (!hasChangedStrategy) {
-				//System.out.println("strategy didnt changed , it is: :"+strategy);
 				break;
 			}
 		}
 
-		//totalAgentGains.addAndGet(agentGain); //should continue ?
 		mailer.addToTotalGain(agentGain);
-		//mailer.addToTotaliterations(numIterations);
 		mailer.determineCurrentIterations(numIterations);
 
 
@@ -119,36 +103,26 @@ public class Agent implements Runnable {
 
 		for( Agent neighbor : neighbors)
 		{
-			//System.out.println("agent strategy "+ strategy+"Id: "+id);
-			//System.out.println("neighbor strategy "+ neighbor.strategy+"Id: "+neighbor.id);
 
 			if (game instanceof BattleOfSexes)
 			{
 				if(this instanceof Husband)
 				{
-					//System.out.println("agent " +id+" - husband");
-
 					if(neighbor instanceof Husband) {
-						//System.out.println("neighbor " +neighbor.id+ "- husband");
-
 						matrix = ((BattleOfSexes) game).getMan_man();
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getMan_woman();
-						//System.out.println("neighbor " +neighbor.id+ "- wife");
 
 					}
 				}
 				else{
-					//System.out.println("agent " +id+ "- wife");
 					if(neighbor instanceof Husband) {
 						matrix = ((BattleOfSexes) game).getWoman_man();
-						//System.out.println("neighbor " +neighbor.id+ "- husband");
 
 					}
 					else {
 						matrix = ((BattleOfSexes) game).getWoman_woman();
-						//System.out.println("neighbor "+ neighbor.id+ "- wife");
 
 					}
 				}
@@ -211,9 +185,7 @@ public class Agent implements Runnable {
 			int randomIndex = random.nextInt(pdStrategies.length);
 			strategy = pdStrategies[randomIndex];
 		} else {
-			// Handle other game types or default behavior
-			// You can set a default strategy here if needed
-
+			//  default behavior
 			return;
 
 		}
